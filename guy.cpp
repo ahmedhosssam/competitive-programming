@@ -11,7 +11,6 @@ int main() {
 	cin >> p0;
 
 	int arr1[p0] = {};
-
 	for (int i = 0; i < p0; i++) {
 		cin >> arr1[i];
 	}
