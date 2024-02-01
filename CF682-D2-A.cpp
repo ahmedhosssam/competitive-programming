@@ -1,25 +1,23 @@
 #include <iostream>
+#include <iomanip>
+#include <string>
+#include <cstring>
+#include <algorithm>
+#include <vector>
+#include <stack>
 #include <cmath>
+
+#define int long long
 using namespace std;
 
-int main() {
+int32_t main() {
     int n; cin >> n;
     int m; cin >> m;
-
     int res = 0;
 
-    int x = (n > m) ? n : m;
-    int y = (n < m) ? n : m;
-
-    for (int i = 1; i <= x; i++) {
-        for (int j = 5-i%5; j <= y; j += 5) {
-            cout << i << " " << j << endl;
-            if ((i+j)%5 ==0) {
-                res++;
-            }
-        }
+    for (int i = 1; i <= n; i++) {
+        res+=(m+i%5)/5;
     }
-
     cout << res << endl;
 
     return 0;
