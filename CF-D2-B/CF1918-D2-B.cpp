@@ -12,14 +12,12 @@ using namespace std;
 int32_t main() {
     int t; cin >> t;
     int n;
-    vector<int> v1;
-    vector<int> v2;
     int x;
+    vector<pair<int, int>> v;
 
     while (t--) {
         int n;
         cin >> n;
-        vector<pair<int, int>> v;
         int x;
         for (int i = 0; i < n; i++) {
             cin >> x;
@@ -38,6 +36,7 @@ int32_t main() {
             cout << v[i].second << " ";
         }
         cout << endl;
+        v.clear();
     }
     return 0;
 }
