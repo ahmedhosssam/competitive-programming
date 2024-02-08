@@ -7,7 +7,7 @@ using namespace std;
 
 uint64_t gcd(uint64_t a, uint64_t b) {
     if (a%b == 0) { return b; }
-    return gcd(b, a % b);
+    return gcd(b, a%b);
 }
 
 int main() {
