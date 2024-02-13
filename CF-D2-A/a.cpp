@@ -15,7 +15,6 @@ int32_t main() {
         if (n%2 == 1) {
             res++;
         }
-        //cout << n << endl;
         n = n/2;
     }
     cout << res << endl;
