@@ -1,0 +1,84 @@
+#include <iostream>
+#include <string>
+#include <cstring>
+#include <algorithm>
+#include <vector>
+#include <stack>
+#include <cmath>
+using namespace std;
+
+#define int long long
+
+int32_t main() {
+    int n, m, x;
+    cin >> n >> m >> x;
+    vector<string> str;
+    for (int i = 0; i < n; i++) {
+        string s; cin >> s;
+        str.push_back(s);
+    }
+
+    vector<pair<int, int>> S;
+    vector<bool> isVis(26, false);
+    vector<bool> isVisCap(26, false);
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (str[i][j] == 'S') {
+                pair<int, int> p;
+                p.first = i;
+                p.second = j;
+                S.push_back(p);
+            } else {
+                isVis[str[i][j]-'a'] = true;
+            }
+        }
+    }
+
+    int q; cin >> q;
+    string ss; cin >> ss;
+
+    int res = 0;
+    for (int i = 0 ; i < q; i++) {
+        if (!isVis[ss[i]-'a'] && !isVis[ss[i]-'A']) {
+            //cout << ss[i] << endl;
+            res = -1;
+            break;
+        }
+        bool add = false;
+
+        if (ss[i] >= 'A' && ss[i] <= 'Z') {
+            if (isVisCap[ss[i]-'A']) {
+                continue;
+            }
+            if (S.size() == 0) {
+                res = -1;
+                break;
+            }
+            for (int j = 0 ; j < n; j++) {
+                if (isVisCap[ss[i]-'A']) { break; }
+                for (int k = 0; k < m; k++) {
+                    if (ss[i]-'A' == str[j][k]-'a' && !isVisCap[ss[i]-'A']) {
+                        int min = ceil(sqrt(pow(S[0].first-j, 2) + pow(S[0].second-k, 2)));
+                        for (int g = 0; g < S.size(); g++) {
+                            if (ceil(sqrt(pow(S[g].first-j, 2) + pow(S[g].second-k, 2))) < min) {
+                                min = ceil(sqrt(pow(S[g].first-j, 2) + pow(S[g].second-k, 2)));
+                            }
+                        }
+                        //cout << ss[i] << endl;
+                        if (min > x && !isVisCap[ss[i]-'A']) {
+                            //cout << min << " --> " << ss[i] << " --> " << j << " " << k << endl;
+                            add = true;
+                        }
+                        isVisCap[ss[i]-'A'] = true;
+                        break;
+                    }
+                }
+            }
+        }
+        if (add) { res++; }
+    }
+
+    cout << res << endl;
+
+    return 0;
+}
