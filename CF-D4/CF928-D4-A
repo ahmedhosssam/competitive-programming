@@ -1,0 +1,36 @@
+#include <iostream>
+#include <string>
+#include <cstring>
+#include <algorithm>
+#include <vector>
+#include <stack>
+#include <cmath>
+using namespace std;
+ 
+#define int long long
+ 
+int32_t main() {
+    int t;
+    cin >> t;
+ 
+    while (t--) {
+        string str;
+        cin >> str;
+ 
+        int as = 0, bs = 0;
+        for (char c : str) {
+            if (c == 'A') {
+                as++;
+            } else {
+                bs++;
+            }
+        }
+ 
+        if (as > bs) {
+            cout << "A" << endl;
+        } else {
+            cout << "B" << endl;
+        }
+    }
+    return 0;
+}

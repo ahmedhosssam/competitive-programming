@@ -1,0 +1,39 @@
+#include <iostream>
+#include <string>
+#include <cstring>
+#include <algorithm>
+#include <vector>
+#include <stack>
+#include <cmath>
+using namespace std;
+
+#define int long long
+
+int32_t main() {
+    int t;
+    cin >> t;
+    
+    while (t--) {
+        int n, k;
+        cin >> n >> k;
+
+        vector<int> arr;
+        int x = 1;
+        int i = 1;
+        while (true) {
+            if (i > n) {
+                i = 1;
+                x++;
+                continue;
+            }
+            if (i*x > n) {
+                break;
+            }
+            arr.push_back(i*x);
+            i+=2;
+            //cout << i << endl;
+        }
+        cout << arr[k-1] << endl;
+    }
+    return 0;
+}
