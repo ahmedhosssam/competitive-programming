@@ -51,7 +51,7 @@ int32_t main() {
             //arr[i].second -= k;
             int b = k;
             int p = i;
-            while (b--) {
+            while (b-- && p < n) {
                 arr[p].second--;
                 if (arr[p].second == 0) {
                     p++;
