@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <cstring>
+#include <cstdint>
 #include <algorithm>
 #include <vector>
 #include <stack>
@@ -13,7 +14,7 @@ int32_t main() {
     int t; cin >> t;
     while (t--) {
         int n; cin >> n;
-        if (n%2 ==0) {
+        if (n == 2 || n == 3) {
             cout << "second\n";
         } else {
             cout << "first\n";

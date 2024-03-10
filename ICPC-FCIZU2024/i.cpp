@@ -30,7 +30,7 @@ int32_t main() {
             cin >> x >> p;
             if (p > wp && x != wx) {
                 hh = true;
-                gg = abs(qq-q);
+                gg = abs(qq-q-1);
                 hhh.push_back({x, gg+1});
                 wp = p;
                 wx = x;

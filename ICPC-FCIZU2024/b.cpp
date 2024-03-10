@@ -10,8 +10,7 @@ using namespace std;
 #define int long long
 
 int32_t main() {
-    int a; cin >> a;
-    int b; cin >> b;
+    int a, b; cin >> a >> b;
     cout << a*b << endl;
     return 0;
 }
