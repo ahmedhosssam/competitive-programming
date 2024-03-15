@@ -3,6 +3,7 @@
 #include <cstring>
 #include <algorithm>
 #include <vector>
+#include <cstdint>
 #include <stack>
 #include <cmath>
 using namespace std;
