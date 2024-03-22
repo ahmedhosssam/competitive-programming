@@ -1,0 +1,31 @@
+    << Triangle Laws >>
+
+Law of Sines:
+
+    * a and b and c are triangle sides
+    
+    sin(A)/a == sin(B)/b == sin(C)/c  <-- Remember: This is applicable mainly in the context of trangles.
+
+    a^2 = b^2 + c^2 + 2*b*c*cos(A)
+
+    b^2 = a^2 + c^2 + 2*a*c*cos(B)
+
+    c^2 = a^2 + b^2 + 2*a*b*cos(C)
+    
+    a^2 = b^2 + c^2
+
+Trigonometric Functions and Formulas:
+    
+    sin(PI/2 - θ) = cos(θ)
+
+    cos(PI/2 - θ) = sin(θ)
+
+    tan(PI/2 - θ) = cot(θ)
+
+    sin(A + B) = sin(A)*cos(B) + sin(B)*cos(A)
+
+    sin(A - B) = sin(A)*cos(B) - sin(B)*cos(A)
+
+    cos(A + B) = cos(A)*cos(B) - sin(A)*sin(B)
+
+    cos(A - B) = cos(A)*cos(B) + sin(A)*sin(A)
