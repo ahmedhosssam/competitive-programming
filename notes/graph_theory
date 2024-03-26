@@ -1,0 +1,10 @@
+How to represent a graph?
+
+1. Adjacency Matrix:
+    
+bool adjMatrix[N][N]; // boolean relation
+int adjMatrix[N][N]; // weighted graph
+vector<int> adjMatrix[N][N]; // usefull if you have more that one edge between 2 nodes
+
+2. Adjacency List:
+vector<vector<int>> adjList; // boolean relation
