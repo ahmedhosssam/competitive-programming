@@ -1,0 +1,78 @@
+Recursive Implementation:
+
+int binary_search(int A[], int key, int imin, int imax) {
+    if (imin > imax) {
+        return -1;  // the set is empty, so we cannot find key
+    }
+    int imid = midpoint(imin, imax);
+    if (key < A[imid]) {
+        return binary_search(A, key, imin, imid-1);
+    } else if (key > A[imid]) {
+        return binary_search(A, key, imid+1, imax);
+    } else {
+        return imid;
+    }
+}
+
+-------------------------
+
+Iterative:
+
+int binary_search(int A[], int key, int imin, int imax) {
+    while (imax >= imin) {
+        int imid = midpoint(imin, imax);
+        if (key < A[imid]) {
+            imax = imid-1;
+        } else if (key > A[imid]) {
+            imin = imid+1;
+        } else {
+            return imid;
+        }
+    }
+    return -1;  // couldn't find key
+}
+
+--------------------------
+
+int midpoint(int start, int end) {
+    return start + (end-start)/2;
+}
+
+--------------------------
+
+
+To find the first index of a number:
+
+BSFindFirst(int A[], int start, int end, int key) {
+    while (start < end) {
+        int mid = midpoint(start, end);
+        if (key < A[mid]) {
+            end = mid-1;
+        } else if (key > A[mid]) {
+            start = mid+1;
+        } else {
+            end = mid;
+        }
+    }
+}
+
+BSFindLast(int A[], int start, int end, int key) {
+    while (start < end) {
+        int mid = midpoint(start, end);
+        if (key < A[mid]) {
+            end = mid-1;
+        } else if (key > A[mid]) {
+            start = mid+1;
+        } else {
+            start = mid;    // could enter an infinite loop
+        }
+    }
+    return start;
+}
+
+To solve the infinite loop problem of BSFindLast:
+    we can use -->      mid = start + (end-start)/2;    OR      mid = start + (end-start-1)/2
+
+Another Trick:
+    if end-start < 15 (OR any other "small" number):
+        just make a for loop
