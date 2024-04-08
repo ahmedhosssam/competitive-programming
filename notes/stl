@@ -1,0 +1,15 @@
+// creating 2D array of boolean
+vector< vector<bool> > vbs(10, vector<bool>(20, true));
+
+// check if element in array
+if (find(v1.begin(), v1.end(), 7) != v1.end()) {
+    cout << 7 << " is in array\n";
+} else {
+    cout << 7 << " is not in array\n";
+}
+
+// to replace every x with y
+replace(v.begin(), v.end(), 2, 7);  // replace every 2 with 7
+
+bool isOdd(int n) { return n%2==1; }
+replace(v.begin(), v.end(), isOdd, 4);  // replace evert odd element with 4

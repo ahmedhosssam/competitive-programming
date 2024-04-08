@@ -8,3 +8,72 @@ vector<int> adjMatrix[N][N]; // usefull if you have more that one edge between 2
 
 2. Adjacency List:
 vector<vector<int>> adjList; // boolean relation
+
+--------------------------------
+
+Breadth-Fist Search (BFS):
+
+int OO = INFINITY;
+vector<int> bfs(int s, vector<vector<int>> &adjList) {
+    vector<int> len(adjList.size(), OO);    // shortest path from node <s> to every other node
+    queue< pair<int, int> > q;  // pair: {node, depth}, and <depth> is distance from starting node
+    q.push(make_pair(s, OO));
+    len[s] = 0;
+
+    int cur, dep;
+    while (!q.empty()) {
+        pair<int, int> p = q.front(), q.pop();
+        cur = p.first, dep = p.second;
+
+        for (int i = 0; i < adjList[cur].size(); i++) {
+            if (len[adjList[cur][i] == OO) {
+                len[adjList[cur][i]] = dep+1;
+                q.push(make_pair(adjList[cur][i], dep+1));
+            }
+        }
+    }
+
+    return len;
+}
+
+---------------------------------------------
+
+Shortest-Path BFS:
+
+vector<int> BFSPath(int s, int d, vector<vector<int>> &adjList) {
+    vector<int> len(adjList.size(), OO);
+    vector<int> par(adjList.size(), OO);
+    queue<int> q;
+    q.push(s), len[s] = 0;
+
+    int dep = 0, cur = s, sz = 1;
+    bool ok = true;
+
+    for (; ok && !q.empty(); ++dep, sz = q.size()) {
+        while (ok && sz--) {
+            cur = q.front();
+            q.pop();
+
+            for (int i = 0; i < adjList.size(); i++) {
+                if (len[ adjList[cur][i] ] == OO) {
+                    q.push(adjList[cur][i]);
+                    len[ adjList[cur][i] ] = dep+1;
+                    par[ adjList[cur][i] ] = cur;
+
+                    if (adjList[cur][i] == d) {
+                        ok = false;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    vector<int> path;
+    while(d != -1) {
+        path.push_back(d);
+        d = par[d];
+    }
+
+    reverse(path.begin, path.end());
+}
