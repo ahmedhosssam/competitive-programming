@@ -77,3 +77,11 @@ vector<int> BFSPath(int s, int d, vector<vector<int>> &adjList) {
 
     reverse(path.begin, path.end());
 }
+
+---------------------------------------------
+
+Clique (graph theory):
+
+- To check if each connected component in a graph is a clique, run dfs and count vertices and edges in the connected component.
+
+    And is's a clique if and only if    << edges = (vertices*(vertices-1))/2 >>
