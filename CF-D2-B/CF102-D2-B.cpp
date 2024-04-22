@@ -12,6 +12,7 @@ using namespace std;
 
 #define int long long
 
+// for (int i = 0; i < n; i++) {
 int32_t main() {
     //char c = '6';
     string str; cin >> str;

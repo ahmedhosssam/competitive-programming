@@ -12,22 +12,22 @@ using namespace std;
 
 #define int long long
 
-// for(int i = 0; i < n; i++) {
+// for (int i = 0; i < n; i++) {
 int32_t main() {
     int t; cin >> t;
     while(t--) {
         int n; cin >> n;
-        vector<int> arr(n);
-        vector<int> vis(105, 0);
-        int res = 0;
-        for(int i = 0; i < n; i++) {
-            cin >> arr[i];
-            vis[arr[i]]++;
-            if(vis[arr[i]]%3==0) {
-                res++;
-            }
+        int a[n];
+        for (int i = 0; i < n; i++) {
+            cin >> a[i];
         }
-        cout << res << endl;
+        int cur = 0;
+        for (int i = 0; i < n; i++) {
+            //cout << cur << endl;
+            cur+= a[i]-cur%a[i];
+        }
+        cout << cur << endl;
+        //cout << "-----\n";
     }
     return 0;
 }
