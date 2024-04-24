@@ -1,0 +1,33 @@
+cur += a[i]  - cur%a[i]        // to get a number that is "strictly bigger"
+
+use set<int> for unique values
+
+sum+=(2*i-1)*i
+
+sqrtl() // to get the sqrt of a long numebr
+
+You can pop_back() and back() on strings    // yeah I didn't know that
+
+Use deque<int> if needed    // push and pop from back and front, very useful
+
+for (int x : {arr[0], arr[n - 1]})  // another way to iterate over an array
+
+CF1948-D2-B:
+    1
+    3
+    12 46 20
+
+    If we will iterate from left to right we will get:
+
+    1) 12 < 46. Don't change the array
+    2) 46 > 20. Split 46 by 4 and 6
+
+    And we got:
+    12 4 6 20. Which is not a non-growth sorted array.  // iteration from left to right is wrong
+
+    If we will iterate from right to left we will get:
+    1) 46 > 20. Split 46 by 4 and 6
+    2) 12 > 4. Split 12 by 1 and 2
+
+    And we got:
+    1 2 4 6 20. Which is a non-growth sorted array.     // iteration from right to left is right
