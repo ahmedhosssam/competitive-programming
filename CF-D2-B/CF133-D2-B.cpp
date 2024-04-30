@@ -11,7 +11,7 @@ using namespace std;
 
 #define int long long
 
-int n, m; 
+int n, m;
 vector<vector<int>> g;
 vector<int> vis;
 
@@ -28,7 +28,7 @@ int dfs(int cur, int par, int &cnt) {
                 return 1;
             }
         }
-	}
+    }
     return 0;
 }
 
@@ -55,7 +55,7 @@ int32_t main() {
         }
 
     }
-    if ( (n-res)%2 == 1) {
+    if ((n-res)%2 == 1) {
         res++;
     }
 
