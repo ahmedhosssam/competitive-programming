@@ -4,7 +4,7 @@ using namespace std;
 typedef vector<int> vi;
 typedef vector<string> vs;
 typedef pair<int, int> pi;
-#define int long long
+//#define int long long
 #define F first
 #define S second
 #define pb push_back
@@ -19,18 +19,18 @@ int32_t main() {
         cout << a << endl;
         return 0;
     }
-    for (int i = 1; i < a.length() && k > 0; i++) {
-        if(a[i]>a[i-1]) {
-            int j=i;
-            while(a[j]>a[j-1]) {
-                swap(a[j], a[j-1]);
-                j--;
-                k--;
-                if(k==0 || j==0) {
-                    break;
-                }
+    int l = a.size();
+    for(int i = 0; i < l; i++) {
+        int x = i;
+        for(int j = i ; j < l;j++) {
+            if(a[j]>a[x] && (j-i)<=k) {
+                x=j;
             }
         }
+        for(int j = x; j>i; j--) {
+            swap(a[j], a[j-1]);
+        }
+        k-=(x-i);
     }
     cout << a << endl;
     return 0;
