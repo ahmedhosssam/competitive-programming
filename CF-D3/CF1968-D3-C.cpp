@@ -13,15 +13,23 @@ typedef pair<int, int> pi;
 
 // for (int i = 0; i < n; i++) {
 int32_t main() {
-    /*
-    freopen("milkorder.in", "r", stdin);
-    freopen("milkorder.out", "w", stdout);
-    */
     int t; cin >> t;
     while (t--) {
         int n; cin >> n;
-        frr(i, 0, n-1) {
+        int x[n-1];
+        vector<int> a(n, 1);
+        frr(i, 0, n-2) {
+            cin >> x[i];
         }
+        a[0]=527361784;
+        for (int i = 1; i < n; i++) {
+            a[i] = x[i-1]+a[i-1];
+        }
+
+        for (int i = 0; i < n; i++) {
+            cout << a[i] << " ";
+        }
+        cout << endl;
     }
     return 0;
 }

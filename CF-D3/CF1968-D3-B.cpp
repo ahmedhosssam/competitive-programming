@@ -13,15 +13,20 @@ typedef pair<int, int> pi;
 
 // for (int i = 0; i < n; i++) {
 int32_t main() {
-    /*
-    freopen("milkorder.in", "r", stdin);
-    freopen("milkorder.out", "w", stdout);
-    */
     int t; cin >> t;
     while (t--) {
         int n; cin >> n;
-        frr(i, 0, n-1) {
+        int m; cin >> m;
+        string a, b; cin >> a >> b;
+        int res = 0;
+        int g = 0;
+        for(int i = 0;i < m &&g < n; i++) {
+            if (b[i]==a[g]) {
+                res++;
+                g++;
+            }
         }
+        cout << res << endl;
     }
     return 0;
 }
