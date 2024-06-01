@@ -11,6 +11,8 @@ typedef pair<int, int> pi;
 #define mp make_pair
 #define frr(i, a, b) for(int i = a; i <= b; i++)
 #define endl "\n"
+#define YES cout << "YES\n";
+#define NO cout << "NO\n";
 
 // for (int i = 0; i < n; i++) {
 int32_t main() {
