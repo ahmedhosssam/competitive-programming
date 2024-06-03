@@ -16,35 +16,95 @@ typedef pair<int, int> pi;
 int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
-    /*
-    freopen("mixmilk.in", "r", stdin);
-    freopen("mixmilk.out", "w", stdout);
-    */
-    int c1, m1; cin >> c1 >> m1;
-    int c2, m2; cin >> c2 >> m2;
-    int c3, m3; cin >> c3 >> m3;
-    int x = 3;
-    int a[3];
-    int mx[3];
-    mx[0]=c1;
-    mx[1]=c2;
-    mx[2]=c3;
-    a[0]=m1;
-    a[1]=m2;
-    a[2]=m3;
-    for(int i = 0; i < 100; i++) {
-        int i1 = i%x;
-        int i2 = (i+1)%x;
-        if(a[i1]+a[i2]<=mx[i2]) {
-            a[i2]+=a[i1];
-            a[i1]=0;
-        } else {
-            a[i1]-=(mx[i2]-a[i2]);
-            a[i2]=mx[i2];
-        }
+    freopen("tttt.in", "r", stdin);
+    freopen("tttt.out", "w", stdout);
+    string s1; cin >> s1;
+    string s2; cin >> s2;
+    string s3; cin >> s3;
+    int x = 0;
+    int y = 0;
+    if(s1[0]==s1[1]&&s1[1]==s1[2]) {
+        x++;
     }
-    cout << a[0] << endl;
-    cout << a[1] << endl;
-    cout << a[2] << endl;
+    if(s2[0]==s2[1]&&s2[1]==s2[2]) {
+        x++;
+    }
+    if(s3[0]==s3[1]&&s3[1]==s3[2]) {
+        x++;
+    }
+    if(s1[0]==s2[0]&&s2[0]==s3[0]) {
+        x++;
+    }
+    if(s1[1]==s2[1]&&s2[1]==s3[1]) {
+        x++;
+    }
+    if(s1[2]==s2[2]&&s2[2]==s3[2]) {
+        x++;
+    }
+    if(s1[0]==s2[1]&&s2[1]==s3[2]) {
+        x++;
+    }
+    if(s1[2]==s2[1]&&s2[1]==s3[0]) {
+        x++;
+    }
+
+    set<char> s;
+    s.insert(s1[0]);
+    s.insert(s1[1]);
+    s.insert(s1[2]);
+    if(s.size()==2) {
+        y++;
+    }
+    s.clear();
+    s.insert(s2[0]);
+    s.insert(s2[1]);
+    s.insert(s2[2]);
+    if(s.size()==2) {
+        y++;
+    }
+    s.clear();
+    s.insert(s3[0]);
+    s.insert(s3[1]);
+    s.insert(s3[2]);
+    if(s.size()==2) {
+        y++;
+    }
+    s.clear();
+    s.insert(s1[0]);
+    s.insert(s2[0]);
+    s.insert(s3[0]);
+    if(s.size()==2) {
+        y++;
+    }
+    s.clear();
+    s.insert(s1[1]);
+    s.insert(s2[1]);
+    s.insert(s3[1]);
+    if(s.size()==2) {
+        y++;
+    }
+    s.clear();
+    s.insert(s1[2]);
+    s.insert(s2[2]);
+    s.insert(s3[2]);
+    if(s.size()==2) {
+        y++;
+    }
+    s.clear();
+    s.insert(s1[0]);
+    s.insert(s2[1]);
+    s.insert(s3[2]);
+    if(s.size()==2) {
+        y++;
+    }
+    s.clear();
+    s.insert(s3[0]);
+    s.insert(s2[1]);
+    s.insert(s1[2]);
+    if(s.size()==2) {
+        y++;
+    }
+    cout << x << endl;
+    cout << y << endl;
     return 0;
 }

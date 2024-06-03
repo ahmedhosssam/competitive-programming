@@ -18,31 +18,23 @@ typedef pair<int, int> pi;
 int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
-    freopen("blocks.in", "r", stdin);
-    freopen("blocks.out", "w", stdout);
+    freopen("cbarn.in", "r", stdin);
+    freopen("cbarn.out", "w", stdout);
     int n; cin >> n;
-    vector<pair<string, string>> a;
-    vector<int> freq(26, 0);
-    for(int i = 0 ; i < n;i++) {
-        string s; cin >> s;
-        string ss; cin >> ss;
-        a.pb({s, ss});
+    int a[n];
+    for(int i = 0 ;i < n ;i++) {
+        cin >> a[i];
     }
-    for(int i = 0 ; i < a.size();i++) {
-        vector<int> f1(26, 0);
-        vector<int> f2(26, 0);
-        for(int j = 0 ; j < a[i].F.length();j++) {
-            f1[a[i].F[j]-'a']++;
+    int res = INT_MAX;
+    for(int i = 0 ; i < n ;i++) {
+        int g = 0;
+        int x= 0;
+        for(int j = i ; j < n+i ; j++) {
+            g += (a[j%n])*x;
+            x++;
         }
-        for(int j = 0 ; j < a[i].S.length();j++) {
-            f2[a[i].S[j]-'a']++;
-        }
-        for(int j = 0 ; j < 26; j++) {
-            freq[j]+=max(f1[j], f2[j]);
-        }
+        res = min(res, g);
     }
-    for(int i = 0 ; i < 26; i++) {
-        cout << freq[i] << endl;
-    }
+    cout << res << endl;
     return 0;
 }
