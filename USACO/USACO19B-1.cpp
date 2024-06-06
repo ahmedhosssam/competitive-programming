@@ -16,31 +16,30 @@ typedef pair<int, int> pi;
 int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
-    freopen("shell.in", "r", stdin);
-    freopen("shell.out", "w", stdout);
-    int n; cin >> n;
+    freopen("gymnastics.in", "r", stdin);
+    freopen("gymnastics.out", "w", stdout);
+    int k, n; cin >> k >> n;
     vector<vector<int>> a;
-    for(int i=0; i < n; i++) {
-        vector<int> g(3);
-        cin >> g[0] >> g[1] >> g[2];
+    for(int i =0 ; i< k; i++) {
+        vector<int> g(n);
+        for(int i = 0; i < n; i++) {
+            cin >> g[i];
+        }
         a.pb(g);
     }
-
-    int res = 0;
-    vector<int> balls(4, 0);
-    for(int j = 1; j <= 3; j++) {
-        int ss = 0;
-        balls[1]=0;
-        balls[2]=0;
-        balls[3]=0;
-        balls[j]=1;
-        for(int i = 0; i < n; i++) {
-            swap(balls[a[i][0]], balls[a[i][1]]);
-            if(balls[a[i][2]]) {
-                ss++;
+    map<pair<int, int>, int> mp;
+    for(int i = 0;i < k; i++) {
+        for(int j = 0; j < n-1; j++) {
+            for(int k = j+1; k < n; k++) {
+                mp[{a[i][j], a[i][k]}]++;
             }
         }
-        res = max(res, ss);
+    }
+    int res = 0;
+    for(auto &x : mp) {
+        if (x.second==k) {
+            res++;
+        }
     }
     cout << res << endl;
     return 0;
