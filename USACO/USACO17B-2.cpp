@@ -18,27 +18,36 @@ typedef pair<int, int> pi;
 int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
-    freopen("shuffle.in", "r", stdin);
-    freopen("shuffle.out", "w", stdout);
-    int n; cin >> n;
-    vector<string> res(n);
-    int a[n];
-    vector<string> id(n);
-    for(int i = 0 ; i < n; i++) {
+    freopen("cownomics.in", "r", stdin);
+    freopen("cownomics.out", "w", stdout);
+    int n, m; cin >> n >> m;
+    vector<string> a(n);
+    vector<string> b(n);
+    string f = "ACGT";
+    int res = 0;
+    for(int i = 0; i < n; i++) {
         cin >> a[i];
     }
-    for(int i = 0 ; i < n; i++) {
-        cin >> id[i];
+    for(int i = 0; i < n; i++) {
+        cin >> b[i];
     }
-    for(int j = 0 ; j < 3; j++) {
-        vector<string> gg(n);
-        for(int i = 0 ; i < n; i++) {
-            gg[i]=id[a[i]-1];
+    for(int i = 0; i < m; i++) {
+        map<char, int> mp1;
+        map<char, int> mp2;
+        for(int j = 0; j < n; j++) {
+            mp1[a[j][i]]++;
         }
-        id=gg;
+        for(int j = 0; j < n; j++) {
+            mp2[b[j][i]]++;
+        }
+        int ok = 1;
+        for (int j = 0; j < 4; j++) {
+            if (mp1[f[j]]&&mp2[f[j]]) {
+                ok=0;
+            }
+        }
+        res+=ok;
     }
-    for(int i = 0 ; i < n; i++) {
-        cout << id[i] << endl;
-    }
+    cout << res << endl;
     return 0;
 }
