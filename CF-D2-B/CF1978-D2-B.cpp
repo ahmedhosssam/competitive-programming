@@ -25,9 +25,19 @@ int32_t main() {
     */
     int t; cin >> t;
     while (t--) {
-        int n; cin >> n;
-        frr(i, 0, n-1) {
+        int n, a, b; cin >> n >> a >> b;
+        int res = n*a;
+        int x = 0;
+         if (a>=b) {
+            cout << res << endl;
+            continue;
+        } else if (n>(b-a)) {
+            x += (b - a) * (b + a + 1) / 2;
+            x += (n-(b-a))*a;
+        } else {
+            x += n * (2 * b - n + 1) / 2;
         }
+        cout << max(res, x) << endl;
     }
     return 0;
 }

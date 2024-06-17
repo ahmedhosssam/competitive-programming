@@ -23,11 +23,12 @@ int32_t main() {
     freopen("wtf.in", "r", stdin);
     freopen("wtf.out", "w", stdout);
     */
-    int t; cin >> t;
-    while (t--) {
-        int n; cin >> n;
-        frr(i, 0, n-1) {
-        }
+    int n; cin >> n;
+    set<int> s;
+    for(int i = 0 ; i < n ; i++) {
+        int x; cin >> x;
+        s.insert(x);
     }
+    cout << s.size() << endl;
     return 0;
 }
