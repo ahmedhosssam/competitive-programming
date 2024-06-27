@@ -12,7 +12,6 @@ typedef pair<int, int> pi;
 #define frr(i, a, b) for(int i = a; i <= b; i++)
 #define Print(a) for(int i = 0; i < a.size(); i++) {cout << a[i] << " ";}
 #define all(x) (x).begin(), (x).end()
-#define rall(x) (x).rbegin(), (x).rend()
 #define endl "\n"
 #define YES cout << "YES\n";
 #define NO cout << "NO\n";
@@ -25,11 +24,29 @@ int32_t main() {
     freopen("wtf.in", "r", stdin);
     freopen("wtf.out", "w", stdout);
     */
-    int t; cin >> t;
-    while (t--) {
-        int n; cin >> n;
-        frr(i, 0, n-1) {
+    int n; cin >> n;
+    n*=2;
+    vi a(n);
+    for(int i = 0 ;i < n; i++) {
+        cin >> a[i];
+    }
+    sort(a.rbegin(), a.rend());
+    int res = INT_MAX;
+    for(int k = 0; k < n; k++) {
+        for(int j = k+1; j < n; j++) {
+            vi b;
+            for(int i = 0; i < n; i++) {
+                if (i!=j&&i!=k) {
+                    b.pb(a[i]);
+                }
+            }
+            int x = 0;
+            for(int i = 0 ;i < n-2; i+=2) {
+                x += abs(b[i]-b[i+1]);
+            }
+            res = min(res, x);
         }
     }
+    cout << res << endl;
     return 0;
 }
