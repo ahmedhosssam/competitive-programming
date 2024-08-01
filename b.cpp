@@ -17,6 +17,12 @@ typedef pair<int, int> pi;
 #define YES cout << "YES\n";
 #define NO cout << "NO\n";
 
+// x.x
+// ...
+
+// ...
+// x.x
+ 
 // for (int i = 0; i < n; i++) {
 int32_t main() {
     ios_base::sync_with_stdio(false);
@@ -28,7 +34,20 @@ int32_t main() {
     int t; cin >> t;
     while (t--) {
         int n; cin >> n;
-        cout << "nigga\n";
+        string s[2];
+        cin >> s[0] >> s[1];
+        int res = 0;
+        for (int i = 0 ; i < n-2; i++) {
+            if (s[0][i]=='x'&&s[0][i+1]=='.'&&s[0][i+2]=='x'&&s[1][i]=='.'&&s[1][i+1]=='.'&&s[1][i+2]=='.') {
+                res++;
+            }
+        }
+        for (int i = 0 ; i < n-2; i++) {
+            if (s[1][i]=='x'&&s[1][i+1]=='.'&&s[1][i+2]=='x'&&s[0][i]=='.'&&s[0][i+1]=='.'&&s[0][i+2]=='.') {
+                res++;
+            }
+        }
+        cout << res << endl;
     }
     return 0;
 }
