@@ -16,50 +16,60 @@ typedef pair<int, int> pi;
 #define YES cout << "YES\n";
 #define NO cout << "NO\n";
 
-vi a;
-int n, tmax;
+/*
+    We can do dfs on the graph and count the maximum number that one cow can reach other cows
+    How the graph will be?
+    It will be an adjacent matrix
+    int adj[201][201];
+    int x,y,p; cin >> x >> y >> p;
+    adj[x][y]=p;
+*/
 
-bool check(int x) {
-    priority_queue<int, vi, greater<int>> pq;
-    int g = 0;
-    for(int i = 0; i < n; i++) {
-        if (pq.size() == x) {
-            g = pq.top();
-            pq.pop();
-        }
-        pq.push(g+a[i]);
+
+vector<int> adj[201];
+int vis[201];
+int reached = 0;
+
+void dfs(int x) {
+    if (vis[x]) {
+        return;
     }
-    while (pq.size()>0) {
-        g = pq.top();
-        pq.pop();
+    vis[x]=1;
+    reached++;
+    for(int c : adj[x]) {
+        dfs(c);
     }
-    return g <= tmax;
 }
 
 // for (int i = 0; i < n; i++) {
 int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
-    freopen("cowdance.in", "r", stdin);
-    freopen("cowdance.out", "w", stdout);
-    cin >> n >> tmax;
-    a = vi(n);
-    for(int i = 0 ; i < n ; i++) {
-        cin >> a[i];
+    freopen("moocast.in", "r", stdin);
+    freopen("moocast.out", "w", stdout);
+    int n; cin >> n;
+    vector<vector<int>> cows;
+    for(int i= 0 ;i < n; i++) {
+        int x,y,p; cin >> x >> y >> p;
+        cows.pb({x,y,p});
     }
-    int res = 0;
-    int l = 1;
-    int r = n;
-    while (l <= r) {
-        int mid = l + (r-l)/2;
-        if (check(mid)) {
-            res = mid;
-            r = mid-1;
-        } else {
-            l = mid+1;
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            int distx = cows[i][0]-cows[j][0];
+            int disty = cows[i][1]-cows[j][1];
+            if ((distx*distx)+(disty*disty) <= cows[i][2]*cows[i][2]) {
+                adj[i].pb(j);
+            }
         }
     }
-    cout << res << endl;
+    int mx = 1;
+    for(int i = 0 ;i < n; i++) {
+        reached=0;
+        fill(vis, vis+n+1, 0);
+        dfs(i);
+        mx = max(mx, reached);
+    }
+    cout << mx << endl;
     return 0;
 }
 

@@ -16,50 +16,57 @@ typedef pair<int, int> pi;
 #define YES cout << "YES\n";
 #define NO cout << "NO\n";
 
-vi a;
-int n, tmax;
-
-bool check(int x) {
-    priority_queue<int, vi, greater<int>> pq;
-    int g = 0;
-    for(int i = 0; i < n; i++) {
-        if (pq.size() == x) {
-            g = pq.top();
-            pq.pop();
+int bs(vi a, int x, int n) {
+    int l = 0;
+    int r = n-1;
+    int mid;
+    while (l <= r) {
+        mid = l+(r-l)/2;
+        if (a[mid]==x) {
+            return mid;
+        } else if (a[mid] > x) {
+            r = mid-1;
+        } else {
+            l = mid+1;
         }
-        pq.push(g+a[i]);
     }
-    while (pq.size()>0) {
-        g = pq.top();
-        pq.pop();
+    return -1;
+}
+
+int f(int x) {
+    return (int) x*x;
+}
+
+string isSqrt(int x) {
+    int l = 0;
+    int r = x;
+    int mid;
+    while (l <= r) {
+        mid = l+(r-l)/2;
+        if (f(mid)==x) {
+            return "YES";
+        } else if (f(mid) > x) {
+            r = mid-1;
+        } else {
+            l = mid+1;
+        }
     }
-    return g <= tmax;
+    return "NO";
 }
 
 // for (int i = 0; i < n; i++) {
 int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
-    freopen("cowdance.in", "r", stdin);
-    freopen("cowdance.out", "w", stdout);
-    cin >> n >> tmax;
-    a = vi(n);
-    for(int i = 0 ; i < n ; i++) {
-        cin >> a[i];
+    /*
+    freopen("wtf.in", "r", stdin);
+    freopen("wtf.out", "w", stdout);
+    */
+    int t; cin >> t;
+    while (t--) {
+        int n; cin >> n;
+        cout << isSqrt(n) << endl;
     }
-    int res = 0;
-    int l = 1;
-    int r = n;
-    while (l <= r) {
-        int mid = l + (r-l)/2;
-        if (check(mid)) {
-            res = mid;
-            r = mid-1;
-        } else {
-            l = mid+1;
-        }
-    }
-    cout << res << endl;
     return 0;
 }
 

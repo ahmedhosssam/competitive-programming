@@ -1,10 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+#define int long long
 typedef vector<int> vi;
 typedef vector<string> vs;
 typedef pair<int, int> pi;
-#define int long long
 #define F first
 #define S second
 #define pb push_back
@@ -17,6 +17,7 @@ typedef pair<int, int> pi;
 #define YES cout << "YES\n";
 #define NO cout << "NO\n";
 
+
 // for (int i = 0; i < n; i++) {
 int32_t main() {
     ios_base::sync_with_stdio(false);
@@ -26,36 +27,31 @@ int32_t main() {
     freopen("wtf.out", "w", stdout);
     */
     int n, x; cin >> n >> x;
-    vector<pair<int, int>> a;
-    for(int i = 0; i < n; i++) {
-        int g;
-        cin >> g;
-        a.pb({g, i+1});
+    vi a(n);
+    int res = 0;
+    int i = 0;
+    int j = 0;
+
+    for(int i = 0 ; i < n ; i++) {
+        cin >> a[i];
     }
+    int sum = a[0];
     sort(all(a));
-    bool ok = false;
-    for(int i = 0 ; i < n; i++) {
-        if (ok)
-            break;
-        int j, k;
-        j = 0;
-        k = n-1;
-        int target = x - a[i].F;
-        while (j!=k) {
-            if (j!=i && k!=i && a[j].F+a[k].F==target) {
-                cout << a[i].S << " " << a[j].S << " " << a[k].S;
-                ok = true;
-                break;
-            }
-            if (a[j].F+a[k].F < target) {
-                j++;
-            } else {
-                k--;
-            }
+
+    while (i<n && j <n) {
+        if (sum==x) {
+            res++;
+        }
+        if (sum > x) {
+            i++;
+            continue;
+        }
+        if (sum < x) {
+            i++;
+            continue;
         }
     }
-    if (!ok) {
-        cout << "IMPOSSIBLE\n";
-    }
+
+    cout << sum << endl;
     return 0;
 }

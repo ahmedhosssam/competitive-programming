@@ -1,15 +1,14 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+#define int long long
 typedef vector<int> vi;
 typedef vector<string> vs;
 typedef pair<int, int> pi;
-#define int long long
 #define F first
 #define S second
 #define pb push_back
 #define mp make_pair
-#define frr(i, a, b) for(int i = a; i <= b; i++)
 #define Print(a) for(int i = 0; i < a.size(); i++) {cout << a[i] << " ";}
 #define all(x) (x).begin(), (x).end()
 #define rall(x) (x).rbegin(), (x).rend()
@@ -17,55 +16,119 @@ typedef pair<int, int> pi;
 #define YES cout << "YES\n";
 #define NO cout << "NO\n";
 
-char contained(int xi, int yi, int xj, int yj) {
-    int fi = xi-yi;
-    int fj = xj-yj;
-    int si = yi+xi;
-    int sj = yj+xj;
-    if (fi>=fj&&si<=sj) {
-        return 'F';
+int mnx;
+int mxx;
+int mny;
+int mxy;
+
+vector<vector<int>> adj;
+vector<pair<int, int>> arr;
+vector<int> vis;
+
+void dfs(int i) {
+    if (vis[i]) {
+        return;
     }
-    if (fi<=fj&&si>=sj) {
-        return 'S';
+    vis[i]=1;
+    mnx = min(mnx, arr[i].F);
+    mxx = max(mxx, arr[i].F);
+    mny = min(mny, arr[i].S);
+    mxy = max(mxy, arr[i].S);
+    for(int node : adj[i]) {
+        dfs(node);
     }
-    return '0';
 }
 
 // for (int i = 0; i < n; i++) {
 int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
-    freopen("mountains.in", "r", stdin);
-    freopen("mountains.out", "w", stdout);
-    int n; cin >> n;
-    vector<pair<int, int>> a(n);
-    for(int i = 0 ; i < n; i++) {
-        cin >> a[i].S >> a[i].F;
-    }
-    sort(rall(a));
-    int res = n;
-    vi vis(n, 0);
+    freopen("fenceplan.in", "r", stdin);
+    freopen("fenceplan.out", "w", stdout);
+    int n, m; cin >> n >> m;
+    adj = vector<vector<int>>(n+1);
+    vis = vector<int>(n+1, 0);
+
+    arr.pb({0,0});
     for(int i = 0; i < n; i++) {
-        if (vis[i]) {
-            continue;
-        }
-        for(int j = i+1; j < n; j++) {
-            if (vis[j]) {
-                continue;
-            }
-            if (contained(a[i].S, a[i].F, a[j].S, a[j].F)=='F') {
-                res--;
-                vis[i]=1;
-                break;
-                //printf("(%d, %d)  (%d, %d)", a[i].S, a[i].F, a[j].S, a[j].F);
-            }
-            if (contained(a[i].S, a[i].F, a[j].S, a[j].F)=='S') {
-                res--;
-                vis[j]=1;
-                //printf("(%d, %d)  (%d, %d)", a[i].S, a[i].F, a[j].S, a[j].F);
-            }
+        int a, b; cin >> a >> b;
+        arr.pb({a, b});
+    }
+    for(int i = 0; i < m; i++) {
+        int a, b; cin >> a >> b;
+        adj[a].pb(b);
+        adj[b].pb(a);
+    }
+
+    int res = INT_MAX;
+    for(int i = 1; i <= n; i++) {
+        if (!vis[i]) {
+            mnx = INT_MAX;
+            mxx = INT_MIN;
+            mny = INT_MAX;
+            mxy = INT_MIN;
+            dfs(i);
+            int X = mxx-mnx;
+            int Y = mxy-mny;
+            res = min(res, 2*(X+Y));
         }
     }
     cout << res << endl;
     return 0;
 }
+
+
+/*
+Pre-submit:
+Write a few simple test cases if sample is not enough.
+Are time limits close? If so, generate max cases.
+Is the memory usage fine?
+Could anything overflow?
+Make sure to submit the right file.
+
+Wrong answer:
+Print your solution! Print debug output, as well.
+Are you clearing all data structures between test cases?
+Can your algorithm handle the whole range of input?
+Read the full problem statement again.
+Do you handle all corner cases correctly?
+Have you understood the problem correctly?
+Any uninitialized variables?
+Any overflows?
+Confusing N and M, i and j, etc.?
+Are you sure your algorithm works?
+What special cases have you not thought of?
+Are you sure the STL functions you use work as you think?
+Add some assertions, maybe resubmit.
+Create some testcases to run your algorithm on.
+Go through the algorithm for a simple case.
+Go through this list again.
+Explain your algorithm to a teammate.
+Ask the teammate to look at your code.
+Go for a small walk, e.g. to the toilet.
+Is your output format correct? (including whitespace)
+Rewrite your solution from the start or let a teammate do it.
+
+Runtime error:
+Have you tested all corner cases locally?
+Any uninitialized variables?
+Are you reading or writing outside the range of any vector?
+Any assertions that might fail?
+Any possible division by 0? (mod 0 for example)
+Any possible infinite recursion?
+Invalidated pointers or iterators?
+Are you using too much memory?
+Debug with resubmits (e.g. remapped signals, see Various).
+
+Time limit exceeded:
+Do you have any possible infinite loops?
+What is the complexity of your algorithm?
+Are you copying a lot of unnecessary data? (References)
+How big is the input and output? (consider scanf)
+Avoid vector, map. (use arrays/unordered_map)
+What do your teammates think about your algorithm?
+
+Memory limit exceeded:
+What is the max amount of memory your algorithm should need?
+Are you clearing all data structures between test cases?
+*/

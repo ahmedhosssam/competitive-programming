@@ -16,50 +16,65 @@ typedef pair<int, int> pi;
 #define YES cout << "YES\n";
 #define NO cout << "NO\n";
 
-vi a;
-int n, tmax;
+// If one vertex can both reach and be reached by all others, then every vertex in this grah can reach all others.
+//
+// can[u][v] is true if you can reach v from u through dfs
+//
+// Let's define a reverse graph where u-->v becomes v-->u, so, if can[1][x]
 
-bool check(int x) {
-    priority_queue<int, vi, greater<int>> pq;
-    int g = 0;
-    for(int i = 0; i < n; i++) {
-        if (pq.size() == x) {
-            g = pq.top();
-            pq.pop();
-        }
-        pq.push(g+a[i]);
+int n, m;
+vector<vector<int>> adj1;
+vector<vector<int>> adj2;
+vi vis1(n+1, 0);
+vi vis2(n+1, 0);
+
+void dfs1(int x) {
+    vis1[x]=1;
+    for(int g : adj1[x]) {
+        if (!vis1[g]) { dfs1(g); }
     }
-    while (pq.size()>0) {
-        g = pq.top();
-        pq.pop();
+}
+
+void dfs2(int x) {
+    vis2[x]=1;
+    for(int g : adj2[x]) {
+        if (!vis2[g]) { dfs2(g); }
     }
-    return g <= tmax;
 }
 
 // for (int i = 0; i < n; i++) {
 int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
-    freopen("cowdance.in", "r", stdin);
-    freopen("cowdance.out", "w", stdout);
-    cin >> n >> tmax;
-    a = vi(n);
-    for(int i = 0 ; i < n ; i++) {
-        cin >> a[i];
+    /*
+    freopen("wtf.in", "r", stdin);
+    freopen("wtf.out", "w", stdout);
+    */
+    cin >> n >> m;
+    adj1 = vector<vector<int>>(n+1);
+    adj2 = vector<vector<int>>(n+1);
+    for(int i = 0; i < m; i++) {
+        int x, y; cin >> x >> y;
+        adj1[x].pb(y);
+        adj2[y].pb(x);
     }
-    int res = 0;
-    int l = 1;
-    int r = n;
-    while (l <= r) {
-        int mid = l + (r-l)/2;
-        if (check(mid)) {
-            res = mid;
-            r = mid-1;
-        } else {
-            l = mid+1;
+    dfs1(1);
+    for(int i = 1; i <= n; i++) {
+        if (!vis1[i]) {
+            cout << "NO\n";
+            cout << 1 << " " << i << endl;
+            return 0;
         }
     }
-    cout << res << endl;
+    dfs2(1);
+    for(int i = 1; i <= n; i++) {
+        if (!vis2[i]) {
+            cout << "NO\n";
+            cout << i << " " << 1 << endl;
+            return 0;
+        }
+    }
+    cout << "YES\n" << endl;
     return 0;
 }
 

@@ -16,50 +16,60 @@ typedef pair<int, int> pi;
 #define YES cout << "YES\n";
 #define NO cout << "NO\n";
 
-vi a;
-int n, tmax;
-
-bool check(int x) {
-    priority_queue<int, vi, greater<int>> pq;
-    int g = 0;
-    for(int i = 0; i < n; i++) {
-        if (pq.size() == x) {
-            g = pq.top();
-            pq.pop();
-        }
-        pq.push(g+a[i]);
-    }
-    while (pq.size()>0) {
-        g = pq.top();
-        pq.pop();
-    }
-    return g <= tmax;
-}
+int n, m;
+vector<vector<int>> adj; // adjacency list
 
 // for (int i = 0; i < n; i++) {
 int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
-    freopen("cowdance.in", "r", stdin);
-    freopen("cowdance.out", "w", stdout);
-    cin >> n >> tmax;
-    a = vi(n);
-    for(int i = 0 ; i < n ; i++) {
-        cin >> a[i];
+    cin >> n >> m;
+    int s=1; // source
+
+    adj = vector<vector<int>> (n+1);
+    for(int i = 0; i < m; i++) {
+        int x, y; cin >> x >> y;
+        adj[x].pb(y);
+        adj[y].pb(x);
     }
-    int res = 0;
-    int l = 1;
-    int r = n;
-    while (l <= r) {
-        int mid = l + (r-l)/2;
-        if (check(mid)) {
-            res = mid;
-            r = mid-1;
-        } else {
-            l = mid+1;
+
+    vector<int> vis(n+1, 0);
+    vector<int> p(n+1, -1); // parent of node
+
+    queue<int> q;
+    q.push(s);
+
+    int cnt = 0;
+    vector<pair<int, int>> cmp;
+    vis = vector<int> (n+1, 0);
+    for (int i = 1; i <= n; i++) {
+        if(!vis[i]) {
+            if (i!=1) {
+                cmp.pb({1, i});
+            }
+            q.push(i);
+            vis[i]=1;
+            while(!q.empty()) {
+                int g = q.front();
+                q.pop();
+                vis[g]=1;
+                for(int v : adj[g]) {
+                    if(!vis[v]) {
+                        vis[v]=1;
+                        q.push(v);
+                        p[v]=g;
+                    }
+                }
+            }
+            cnt++;
         }
     }
-    cout << res << endl;
+    cout << cnt-1 << endl;
+    if (cnt-1 != 0) {
+        for(int i = 0 ;i < cmp.size(); i++) {
+            cout << cmp[i].F << " " << cmp[i].S << endl;
+        }
+    }
     return 0;
 }
 

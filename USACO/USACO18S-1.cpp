@@ -16,48 +16,34 @@ typedef pair<int, int> pi;
 #define YES cout << "YES\n";
 #define NO cout << "NO\n";
 
-vi a;
-int n, tmax;
-
-bool check(int x) {
-    priority_queue<int, vi, greater<int>> pq;
-    int g = 0;
-    for(int i = 0; i < n; i++) {
-        if (pq.size() == x) {
-            g = pq.top();
-            pq.pop();
-        }
-        pq.push(g+a[i]);
-    }
-    while (pq.size()>0) {
-        g = pq.top();
-        pq.pop();
-    }
-    return g <= tmax;
-}
-
 // for (int i = 0; i < n; i++) {
 int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
-    freopen("cowdance.in", "r", stdin);
-    freopen("cowdance.out", "w", stdout);
-    cin >> n >> tmax;
-    a = vi(n);
+    freopen("convention.in", "r", stdin);
+    freopen("convention.out", "w", stdout);
+    int n, m, c; cin >> n >> m >> c;
+    vector<vector<int>> a;
+    vi inp(n);
     for(int i = 0 ; i < n ; i++) {
-        cin >> a[i];
+        cin >> inp[i];
     }
-    int res = 0;
-    int l = 1;
-    int r = n;
-    while (l <= r) {
-        int mid = l + (r-l)/2;
-        if (check(mid)) {
-            res = mid;
-            r = mid-1;
-        } else {
-            l = mid+1;
+    sort(all(inp));
+    vi tmp;
+    a.pb(tmp);
+    int cnt = 0;
+    for(int i = 0; i < n; i++) {
+        if (cnt==c) {
+            a.pb(tmp);
+            cnt=0;
         }
+        a[a.size()-1].pb(inp[i]);
+        cnt++;
+    }
+    int res = INT_MIN;
+    for(int i = 0 ;i < a.size(); i++) {
+        //cout << a.size() << endl;
+        res = max(res, abs(a[i][0]-a[i][max((int)a[i].size()-1, 0LL)]));
     }
     cout << res << endl;
     return 0;
@@ -118,3 +104,4 @@ Memory limit exceeded:
 What is the max amount of memory your algorithm should need?
 Are you clearing all data structures between test cases?
 */
+

@@ -16,50 +16,28 @@ typedef pair<int, int> pi;
 #define YES cout << "YES\n";
 #define NO cout << "NO\n";
 
-vi a;
-int n, tmax;
-
-bool check(int x) {
-    priority_queue<int, vi, greater<int>> pq;
-    int g = 0;
-    for(int i = 0; i < n; i++) {
-        if (pq.size() == x) {
-            g = pq.top();
-            pq.pop();
-        }
-        pq.push(g+a[i]);
-    }
-    while (pq.size()>0) {
-        g = pq.top();
-        pq.pop();
-    }
-    return g <= tmax;
-}
-
 // for (int i = 0; i < n; i++) {
 int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
-    freopen("cowdance.in", "r", stdin);
-    freopen("cowdance.out", "w", stdout);
-    cin >> n >> tmax;
-    a = vi(n);
+    freopen("haybales.in", "r", stdin);
+    freopen("haybales.out", "w", stdout);
+    int n, q; cin >> n >> q;
+    vi a(n);
+    map<int, int> m;
     for(int i = 0 ; i < n ; i++) {
         cin >> a[i];
+        m[a[i]]+=1;
     }
-    int res = 0;
-    int l = 1;
-    int r = n;
-    while (l <= r) {
-        int mid = l + (r-l)/2;
-        if (check(mid)) {
-            res = mid;
-            r = mid-1;
-        } else {
-            l = mid+1;
-        }
+    sort(all(a));
+    for(int i = 0;i < q; i++) {
+        int l, r; cin >> l >> r;
+        int res = 0;
+        auto up = upper_bound(all(a), r);
+        auto lo = lower_bound(all(a), l);
+        res = up-lo;
+        cout << res << endl;
     }
-    cout << res << endl;
     return 0;
 }
 
