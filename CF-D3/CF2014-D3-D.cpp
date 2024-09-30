@@ -16,25 +16,6 @@ typedef pair<int, int> pi;
 #define YES cout << "YES\n";
 #define NO cout << "NO\n";
 
-int n, m;
-char grid[1001][1001];
-int vis[1001][1001];
-int res = 0;
-
-void dfs(int i, int j) {
-    if (i<0 || i >= n || j<0 || j >= m)
-        return;
-    if (vis[i][j])
-        return;
-    if (grid[i][j]=='#')
-        return;
-    vis[i][j]=1;
-    dfs(i+1, j);
-    dfs(i-1, j);
-    dfs(i, j+1);
-    dfs(i, j-1);
-}
-
 // for (int i = 0; i < n; i++) {
 int32_t main() {
     ios_base::sync_with_stdio(false);
@@ -43,21 +24,36 @@ int32_t main() {
     freopen("wtf.in", "r", stdin);
     freopen("wtf.out", "w", stdout);
     */
-    cin >> n >> m;
-    for(int i = 0; i < n; i++) {
-        for(int j = 0; j < m; j++) {
-            cin >> grid[i][j];
+    int t; cin >> t;
+    while (t--) {
+        int n, d, k; cin >> n >> d >> k;
+        vi a(n+1, 0);
+        vi pref(n+1, 0);
+        for(int i = 0; i < k; i++) {
+            int x, y; cin >> x >> y;
+            a[x]++;
+            a[y]--;
         }
-    }
-    for(int i = 0; i < n; i++) {
-        for(int j = 0; j < m; j++) {
-            if (!vis[i][j] && grid[i][j]=='.') {
-                dfs(i, j);
-                res++;
+        pref[0]=a[0];
+        for(int i = 1; i <= n; i++) {
+            pref[i]=pref[i-1]+a[i];
+        }
+        int mn = INT_MAX;
+        int mx = INT_MIN;
+        int resmn = 0;
+        int resmx = 0;
+        for(int i = 1; i <= n; i++) {
+            if (pref[i]<mn) {
+                mn=pref[i];
+                resmn=i;
+            }
+            if (pref[i]>mx) {
+                mx=pref[i];
+                resmx=i;
             }
         }
+        cout << resmx << " " << resmn << endl;
     }
-    cout << res << endl;
     return 0;
 }
 
