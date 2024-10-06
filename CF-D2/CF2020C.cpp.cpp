@@ -16,57 +16,22 @@ typedef pair<int, int> pi;
 #define YES cout << "YES\n";
 #define NO cout << "NO\n";
 
-vector<vector<int>> adj;
-int n, m;
-string s;
-int x, y;
-char z;
-vector<int> res;
-bool done = false;
-
-void dfs(int i, int j=-1) {
-    if (s[i-1]==z) {
-        cout << s[i-1] << " " << i << endl;
-        res.pb(1);
-        done=true;
-        return;
-    }
-    for(int g : adj[i]) {
-        if (g==y) {
-            return;
-        }
-        if (g!=j) {
-            dfs(g, i);
-        }
-    }
-}
-
 // for (int i = 0; i < n; i++) {
 int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
-    //freopen("milkvisits.in", "r", stdin);
-    //freopen("milkvisits.out", "w", stdout);
-    cin >> n >> m;
-    cin >> s;
-    adj = vector<vector<int>>(n+1);
-    for(int i = 0; i < n-1; i++) {
-        int x, y; cin >> x >> y;
-        adj[x].pb(y);
-        adj[y].pb(x);
-    }
-    for(int i = 0; i < m; i++) {
-        done=false;
-        cin >> x >> y >> z;
-        dfs(x);
-        if (!done) {
-            res.pb(0);
+    /*
+    freopen("wtf.in", "r", stdin);
+    freopen("wtf.out", "w", stdout);
+    */
+    int t; cin >> t;
+    while (t--) {
+        int n; cin >> n;
+        vi a(n);
+        for(int i = 0 ; i < n ; i++) {
+            cin >> a[i];
         }
     }
-    for(int i = 0; i < m; i++) {
-        cout << res[i];
-    }
-    cout << endl;
     return 0;
 }
 

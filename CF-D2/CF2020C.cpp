@@ -16,57 +16,42 @@ typedef pair<int, int> pi;
 #define YES cout << "YES\n";
 #define NO cout << "NO\n";
 
-vector<vector<int>> adj;
-int n, m;
-string s;
-int x, y;
-char z;
-vector<int> res;
-bool done = false;
+int b, c, d;
 
-void dfs(int i, int j=-1) {
-    if (s[i-1]==z) {
-        cout << s[i-1] << " " << i << endl;
-        res.pb(1);
-        done=true;
-        return;
-    }
-    for(int g : adj[i]) {
-        if (g==y) {
-            return;
-        }
-        if (g!=j) {
-            dfs(g, i);
-        }
-    }
+int check(int a) {
+    return (a|b)-(a&c);
 }
 
 // for (int i = 0; i < n; i++) {
 int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
-    //freopen("milkvisits.in", "r", stdin);
-    //freopen("milkvisits.out", "w", stdout);
-    cin >> n >> m;
-    cin >> s;
-    adj = vector<vector<int>>(n+1);
-    for(int i = 0; i < n-1; i++) {
-        int x, y; cin >> x >> y;
-        adj[x].pb(y);
-        adj[y].pb(x);
-    }
-    for(int i = 0; i < m; i++) {
-        done=false;
-        cin >> x >> y >> z;
-        dfs(x);
-        if (!done) {
-            res.pb(0);
+    /*
+    freopen("wtf.in", "r", stdin);
+    freopen("wtf.out", "w", stdout);
+    */
+    int t; cin >> t;
+    while (t--) {
+        cin >> b >> c >> d;
+        int l = 0;
+        int r = 2e61;
+        int res = -1;
+        bool ok = false;
+        while (l < r) {
+            int mid = (l+r)/2;
+            cout << l << " " << r << ": " << check(mid)<< endl;
+            if (check(mid) == d) {
+                res=mid;
+                ok=true;
+                break;
+            } else if (check(mid)<d) {
+                l = mid+1;
+            } else {
+                r = mid-1;
+            }
         }
+        cout << res << endl;
     }
-    for(int i = 0; i < m; i++) {
-        cout << res[i];
-    }
-    cout << endl;
     return 0;
 }
 

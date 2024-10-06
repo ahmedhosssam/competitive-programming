@@ -16,57 +16,58 @@ typedef pair<int, int> pi;
 #define YES cout << "YES\n";
 #define NO cout << "NO\n";
 
+int n;
+int x = -1;
+int maxCount = INT_MIN;
 vector<vector<int>> adj;
-int n, m;
-string s;
-int x, y;
-char z;
-vector<int> res;
-bool done = false;
+vector<int> vis;
 
-void dfs(int i, int j=-1) {
-    if (s[i-1]==z) {
-        cout << s[i-1] << " " << i << endl;
-        res.pb(1);
-        done=true;
-        return;
-    }
+void dfsUtil(int i, int count) {
+    vis[i]=1;
+    count++;
     for(int g : adj[i]) {
-        if (g==y) {
-            return;
-        }
-        if (g!=j) {
-            dfs(g, i);
+        if (!vis[g]) {
+            if (count>=maxCount) {
+                maxCount = count;
+                x = g;
+            }
+            dfsUtil(g, count);
         }
     }
+}
+
+void dfs(int i) {
+    int count = 0;
+    dfsUtil(i, count+1);
 }
 
 // for (int i = 0; i < n; i++) {
 int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
-    //freopen("milkvisits.in", "r", stdin);
-    //freopen("milkvisits.out", "w", stdout);
-    cin >> n >> m;
-    cin >> s;
+    /*
+    freopen("wtf.in", "r", stdin);
+    freopen("wtf.out", "w", stdout);
+    */
+    cin >> n;
+    if (n==1) {
+        cout << 0 << endl;
+        return 0;
+    }
     adj = vector<vector<int>>(n+1);
+    vis = vector<int>(n+1, 0);
     for(int i = 0; i < n-1; i++) {
         int x, y; cin >> x >> y;
         adj[x].pb(y);
         adj[y].pb(x);
     }
-    for(int i = 0; i < m; i++) {
-        done=false;
-        cin >> x >> y >> z;
-        dfs(x);
-        if (!done) {
-            res.pb(0);
-        }
-    }
-    for(int i = 0; i < m; i++) {
-        cout << res[i];
-    }
-    cout << endl;
+    // choose a
+    // find b from a
+    // find c from b
+    dfs(1);
+    vis = vector<int>(n+1, 0);
+    dfs(x);
+    cout << maxCount-1 << endl;
     return 0;
 }
 

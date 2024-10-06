@@ -16,28 +16,23 @@ typedef pair<int, int> pi;
 #define YES cout << "YES\n";
 #define NO cout << "NO\n";
 
+int n;
 vector<vector<int>> adj;
-int n, m;
-string s;
-int x, y;
-char z;
+vector<int> vis;
 vector<int> res;
-bool done = false;
+int g = 0;
 
-void dfs(int i, int j=-1) {
-    if (s[i-1]==z) {
-        cout << s[i-1] << " " << i << endl;
-        res.pb(1);
-        done=true;
-        return;
+double dfs(int i = 1, int j = -1) {
+    double sum = 0;
+    for(int x : adj[i]) {
+        if (x!=j) {
+            sum += dfs(x, i)+1;
+        }
     }
-    for(int g : adj[i]) {
-        if (g==y) {
-            return;
-        }
-        if (g!=j) {
-            dfs(g, i);
-        }
+    if (sum) {
+        return sum/(adj[i].size()-(j!=-1));
+    } else {
+        return 0;
     }
 }
 
@@ -45,28 +40,18 @@ void dfs(int i, int j=-1) {
 int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
-    //freopen("milkvisits.in", "r", stdin);
-    //freopen("milkvisits.out", "w", stdout);
-    cin >> n >> m;
-    cin >> s;
+    /*
+    freopen("wtf.in", "r", stdin);
+    freopen("wtf.out", "w", stdout);
+    */
+    cin >> n;
     adj = vector<vector<int>>(n+1);
     for(int i = 0; i < n-1; i++) {
         int x, y; cin >> x >> y;
         adj[x].pb(y);
         adj[y].pb(x);
     }
-    for(int i = 0; i < m; i++) {
-        done=false;
-        cin >> x >> y >> z;
-        dfs(x);
-        if (!done) {
-            res.pb(0);
-        }
-    }
-    for(int i = 0; i < m; i++) {
-        cout << res[i];
-    }
-    cout << endl;
+    cout << fixed << setprecision(7) << dfs() << endl;
     return 0;
 }
 

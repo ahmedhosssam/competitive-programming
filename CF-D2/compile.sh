@@ -11,7 +11,7 @@ while true; do
     nvim "${G}.cpp"
     clear
     g++ "${G}.cpp" 
-    ./a.out < "input_${G}"
+    ./a.out < "input"
 
     sleep 3s
 done
