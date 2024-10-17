@@ -24,27 +24,22 @@ int32_t main() {
     freopen("wtf.in", "r", stdin);
     freopen("wtf.out", "w", stdout);
     */
-    int t; cin >> t;
-    while (t--) {
-        int n, q; cin >> n >> q;
-        vi a(n);
-        for(int i = 0 ; i < n ; i++) {
-            cin >> a[i];
-        }
-        map<int, int> mp;
-        for(int i = 0 ; i < n ; i++) {
-            int g = 0;
-            for(int j = i+1 ; j < n-1 ; j++) {
-                g++;
-            }
-            mp[g]=g;
-        }
-        for(int i = 0; i < q; i++) {
-            int x; cin >> x;
-            cout << mp[x] << " ";
-        }
-        cout << endl;
+    int n; cin >> n;
+    vi a(n);
+    for(int i = 0 ; i < n ; i++) {
+        cin >> a[i];
     }
+    int sum = -accumulate(all(a), 0LL);
+    for(int i = 0 ;i < 30; i++) {
+        int s = 0 ;
+        vector<int> pref = {1, 0};
+        for(int g : a) {
+            s ^= (g >> i) & 1;
+            sum += pref[s^1] * 1LL << i;
+            pref[s]++;
+        }
+    }
+    cout << sum << endl;
     return 0;
 }
 

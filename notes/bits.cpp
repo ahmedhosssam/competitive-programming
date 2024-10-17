@@ -16,35 +16,13 @@ typedef pair<int, int> pi;
 #define YES cout << "YES\n";
 #define NO cout << "NO\n";
 
-// for (int i = 0; i < n; i++) {
 int32_t main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(0);
-    /*
-    freopen("wtf.in", "r", stdin);
-    freopen("wtf.out", "w", stdout);
-    */
-    int t; cin >> t;
-    while (t--) {
-        int n, q; cin >> n >> q;
-        vi a(n);
-        for(int i = 0 ; i < n ; i++) {
-            cin >> a[i];
-        }
-        map<int, int> mp;
-        for(int i = 0 ; i < n ; i++) {
-            int g = 0;
-            for(int j = i+1 ; j < n-1 ; j++) {
-                g++;
-            }
-            mp[g]=g;
-        }
-        for(int i = 0; i < q; i++) {
-            int x; cin >> x;
-            cout << mp[x] << " ";
-        }
-        cout << endl;
+    int x = 14;
+    for(int i = 128 ; i >= 0; i--) {
+        if (x&(1<<i)) cout << 1;
+        else cout << 0;
     }
+    cout << endl;
     return 0;
 }
 

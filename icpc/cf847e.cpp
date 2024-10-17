@@ -24,27 +24,29 @@ int32_t main() {
     freopen("wtf.in", "r", stdin);
     freopen("wtf.out", "w", stdout);
     */
-    int t; cin >> t;
-    while (t--) {
-        int n, q; cin >> n >> q;
-        vi a(n);
-        for(int i = 0 ; i < n ; i++) {
-            cin >> a[i];
-        }
-        map<int, int> mp;
-        for(int i = 0 ; i < n ; i++) {
-            int g = 0;
-            for(int j = i+1 ; j < n-1 ; j++) {
-                g++;
+    int n; cin >> n;
+    string s; cin >> s;
+    int mx = INT_MIN;
+    for(int i = 0; i < n; i++) {
+        if (s[i]=='*') {
+            for(int j = i+1 ; j < n; j++) {
+                if (s[j]=='P') {
+                    mx = max(mx, abs(j-i));
+                    i=j;
+                    break;
+                }
             }
-            mp[g]=g;
+        } else if (s[i]=='P') {
+            for(int j = i+1 ; j < n; j++) {
+                if (s[j]=='*') {
+                    mx = max(mx, abs(j-i));
+                    i=j;
+                    break;
+                }
+            }
         }
-        for(int i = 0; i < q; i++) {
-            int x; cin >> x;
-            cout << mp[x] << " ";
-        }
-        cout << endl;
     }
+    cout << mx << endl;
     return 0;
 }
 

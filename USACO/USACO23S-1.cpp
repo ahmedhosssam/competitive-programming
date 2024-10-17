@@ -16,6 +16,13 @@ typedef pair<int, int> pi;
 #define YES cout << "YES\n";
 #define NO cout << "NO\n";
 
+bool check(int g) {
+    if (g<=0) {
+        return false;
+    }
+    return true;
+}
+
 // for (int i = 0; i < n; i++) {
 int32_t main() {
     ios_base::sync_with_stdio(false);
@@ -26,24 +33,34 @@ int32_t main() {
     */
     int t; cin >> t;
     while (t--) {
-        int n, q; cin >> n >> q;
-        vi a(n);
-        for(int i = 0 ; i < n ; i++) {
-            cin >> a[i];
+        int n, tc, tm; cin >> n >> tc >> tm;
+        int a[n];
+        int b[n];
+        int c[n];
+        for(int i = 0; i < n; i++) {
+            cin >> a[i] >> b[i] >> c[i];
         }
-        map<int, int> mp;
-        for(int i = 0 ; i < n ; i++) {
-            int g = 0;
-            for(int j = i+1 ; j < n-1 ; j++) {
-                g++;
+        int l = 0;
+        int r = 1e9;
+        int w = 0;
+        while (l<r) {
+            int x = (l+r)/2;
+            bool bl = true;
+            for(int i = 0; i < n; i++) {
+                int aa = a[i]*(tc-w);
+                int bb = b[i]*tm;
+                if ((aa+bb)<=0 || (aa+bb)>c[i]) {
+                    bl=false;
+                }
             }
-            mp[g]=g;
+            if (bl) {
+                w = x;
+                r = x-1;
+            } else {
+                l = x+1;
+            }
         }
-        for(int i = 0; i < q; i++) {
-            int x; cin >> x;
-            cout << mp[x] << " ";
-        }
-        cout << endl;
+        cout << w << endl;
     }
     return 0;
 }

@@ -26,24 +26,22 @@ int32_t main() {
     */
     int t; cin >> t;
     while (t--) {
-        int n, q; cin >> n >> q;
+        int n; cin >> n;
         vi a(n);
         for(int i = 0 ; i < n ; i++) {
             cin >> a[i];
         }
-        map<int, int> mp;
-        for(int i = 0 ; i < n ; i++) {
-            int g = 0;
-            for(int j = i+1 ; j < n-1 ; j++) {
-                g++;
-            }
-            mp[g]=g;
-        }
+        string s; cin >> s;
+        int num = 0;
+        int q; cin >> q;
         for(int i = 0; i < q; i++) {
-            int x; cin >> x;
-            cout << mp[x] << " ";
+            int tp; cin >> tp;
+            if (tp==1) {
+                int l, r; cin >> l >> r;
+            } else {
+                int g; cin >> g;
+            }
         }
-        cout << endl;
     }
     return 0;
 }

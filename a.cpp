@@ -9,7 +9,6 @@ typedef pair<int, int> pi;
 #define S second
 #define pb push_back
 #define mp make_pair
-#define frr(i, a, b) for(int i = a; i <= b; i++)
 #define Print(a) for(int i = 0; i < a.size(); i++) {cout << a[i] << " ";}
 #define all(x) (x).begin(), (x).end()
 #define rall(x) (x).rbegin(), (x).rend()
@@ -17,6 +16,7 @@ typedef pair<int, int> pi;
 #define YES cout << "YES\n";
 #define NO cout << "NO\n";
 
+// for (int i = 0; i < n; i++) {
 int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
@@ -26,42 +26,19 @@ int32_t main() {
     */
     int t; cin >> t;
     while (t--) {
-        int n, q; cin >> n >> q;
-        string s1; cin >> s1;
-        string s2; cin >> s2;
-        vector<vector<int>> px(n, vector<int>(26, 0));
-        vector<vector<int>> py(n, vector<int>(26, 0));
-        px[0][s1[0]-'a']++;
-        py[0][s2[0]-'a']++;
-        for(int i = 1 ; i < n; i++) {
-            px[i][s1[i]-'a']++;
-            for(int j = 0; j < 26; j++) {
-                px[i][j] += px[i-1][j];
-            }
+        int n; cin >> n;
+        vi a(n);
+        int res = 0;
+        for(int i = 0 ; i < n ; i++) {
+            cin >> a[i];
+            res += ((i+1)&1 ? a[i] : a[i]*-1);
         }
-        for(int i = 1 ; i < n; i++) {
-            py[i][s2[i]-'a']++;
-            for(int j = 0; j < 26; j++) {
-                py[i][j] += py[i-1][j];
-            }
-        }
-        while (q--) {
-            int x, y; cin >> x >> y;
-            x--;
-            y--;
-            int res = 0;
-            for(int i = 0; i < 26; i++) {
-                if (x==0) {
-                    res += abs((px[y][i])-(py[y][i]));
-                } else {
-                    res += abs((px[y][i]-px[x-1][i])-(py[y][i]-py[x-1][i]));
-                }
-            }
-            cout << res/2 << endl;
-        }
+        cout << res << endl;
     }
     return 0;
 }
+
+
 /*
 Pre-submit:
 Write a few simple test cases if sample is not enough.
