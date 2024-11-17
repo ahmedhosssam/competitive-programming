@@ -35,7 +35,7 @@ int32_t main() {
     int t; cin >> t;
     while (t--) {
         // a[i]+a[i+1] shouldn't equal to prime
-        // the last number from odds + first number from evens should equal to prime
+        // the last number from odds + first number from evens shouldn't equal to prime
         int n; cin >> n;
         if (n<=3) {
             cout << -1 << endl;
