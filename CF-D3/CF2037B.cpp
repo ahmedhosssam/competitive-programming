@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-
+ 
 #define int long long
 typedef vector<int> vi;
 typedef vector<string> vs;
@@ -16,8 +16,7 @@ typedef pair<int, int> pi;
 #define endl "\n"
 #define YES cout << "YES\n";
 #define NO cout << "NO\n";
-
-// for (int i = 0; i < n; i++) {
+ 
 int32_t main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
@@ -27,9 +26,26 @@ int32_t main() {
     */
     int t; cin >> t;
     while (t--) {
+        // find two numbers --> (x*y)+2==k
         int n; cin >> n;
-        frr(i, 0, n-1) {
+        vi a(n);
+        map<int, int> mp;
+        for(int i = 0; i < n; i++) {
+            cin >> a[i];
         }
+        int x = -1;
+        int y = -1;
+        int g = n-2;
+        for(int i = 0 ; i < n ; i++) {
+            int Y = g/a[i];
+            if (mp[Y]==1 && ((a[i]*Y)+2)==n) {
+                x=a[i];
+                y=Y;
+                break;
+            }
+            mp[a[i]]=1;
+        }
+        cout << x << " " << y << endl;
     }
     return 0;
 }

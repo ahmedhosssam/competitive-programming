@@ -9,8 +9,8 @@ G=$1
 
 while true; do
     nvim "${G}.cpp"
-    g++ "${G}.cpp" 
-    ./a.out < "input"
+    clear
+    g++ "${G}.cpp" && ./a.out < "input"
 
     sleep 3s
 done
