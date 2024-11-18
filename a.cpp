@@ -26,18 +26,22 @@ int32_t main() {
     */
     int t; cin >> t;
     while (t--) {
-        vs s(2); cin >> s[0] >> s[1];
-        sort(all(s));
-        int g = 0;
-        int i = 0;
-        while (s[0][i]==s[1][i]) {
-            g++;
-            i++;
-            if (i==s[0].length()) {
-                break;
-            }
+        int n, m; cin >> n >> m;
+        vi a(n);
+        for(int i = 0; i < n; i++) {
+            cin >> a[i];
         }
-        cout << s[0].length()+s[1].length()-g+(g!=0) << endl;
+        sort(rall(a));
+        int mx = a[0];
+        for(int i = 0; i < m; i++) {
+            char ch; cin >> ch;
+            int l, r; cin >> l >> r;
+            if (mx>=l&&mx<=r) {
+                (ch=='+') ? mx++ : mx--;
+            }
+            cout << mx << " ";
+        }
+        cout << endl;
     }
     return 0;
 }
