@@ -9,12 +9,24 @@ typedef pair<int, int> pi;
 #define S second
 #define pb push_back
 #define mp make_pair
-#define Print(a) for(int i = 0; i < a.size(); i++) {cout << a[i] << " ";} cout << endl;
+#define Print(a) for(int i = 0; i < a.size(); i++) {cout << a[i] << " ";}
 #define all(x) (x).begin(), (x).end()
 #define rall(x) (x).rbegin(), (x).rend()
 #define endl "\n"
 #define YES cout << "YES\n";
 #define NO cout << "NO\n";
+
+int powermod(int base, int exp, int mod) {
+    int result = 1;
+    while (exp != 0) {
+        if ((exp % 2) == 1) {
+            result = (result * base) % mod;
+        }
+        base = (base * base) % mod;
+        exp /= 2;
+    }
+    return result;
+}
 
 int32_t main() {
     ios_base::sync_with_stdio(false);
@@ -23,26 +35,8 @@ int32_t main() {
     freopen("wtf.in", "r", stdin);
     freopen("wtf.out", "w", stdout);
     */
-    int t; cin >> t;
-    while (t--) {
-        string s; cin >> s;
-        int sum = 0;
-        for(int i = 0; i < s.length(); i++) {
-            if (s[i]=='2') {
-                sum+=4;
-                continue;
-            }
-            if (s[i]=='3') {
-                sum+=9;
-                continue;
-            }
-            sum += (s[i]-'0');
-        }
-        if (sum%9==0) {
-            YES
-        } else {
-            NO
-        }
-    }
+    int n; cin >> n;
+    int mod = 1e9+7;
+    cout << (powermod(3, 3*n, mod) - powermod(7, n, mod)+mod)%mod << endl;
     return 0;
 }
