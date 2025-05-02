@@ -1,0 +1,16 @@
+DP-State:
+
+For every problem, we need to specify some paramaters
+that uniquly identify the sub-problem.
+
+dp[p1][p2][p3]...[pk] <--- k is the number of parameters
+
+In bottom-up, you need to think what should be
+evaluated first
+--> You need to evaluate the smallest sub-problem first.
+
+The 4 Steps of DP:
+1- Find out the states/subproblems
+2- Define Base Cases
+3- Find transitions (formulas to calculate dp based on prev dp that we found)
+4- Print the result

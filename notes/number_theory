@@ -1,0 +1,55 @@
+Euler's Totient Function (phi-function):
+It count the number of integers between 1 and n inclusive, which are gcd(a[i], n) == 1
+
+Properties:
+- if p is prime, then phi(p) = p-1;
+
+- phi(p**k) = p**k - p**(k-1) # if p is prime and k >= 1
+
+- It's Multiplicative:
+if a and b are relatively prime (coprime), then:
+    phi(a*b) = phi(a) * phi(b)
+
+- if a and b are not coprime, then:
+    d = gcd(a, b)
+    phi(a*b) = phi(a) * phi(b) * d/phi(d)
+
+- phi(n) = n * (1-(1/p1)) * (1-(1/p2)) * .. * (1-(1/pk))
+
+    where p1..pk are prime factors of n.
+
+- sum of all phi(d[i]) = n ,  where d are the divisors of n
+
+
+phi implementation using factorization on O(sqrt(n)):
+
+int phi(int n) {
+    int result = n;
+    for (int i = 2; i * i <= n; i++) {
+        if (n % i == 0) {
+            while (n % i == 0)
+                n /= i;
+            result -= result / i;
+        }
+    }
+    if (n > 1)
+        result -= result / n;
+    return result;
+}
+
+Euler torient from 1 to n in O(nloglogn):
+
+void phi_1_to_n(int n) {
+    vector<int> phi(n + 1);
+    for (int i = 0; i <= n; i++)
+        phi[i] = i;
+
+    for (int i = 2; i <= n; i++) {
+        if (phi[i] == i) {
+            for (int j = i; j <= n; j += i)
+                phi[j] -= phi[j] / i;
+        }
+    }
+}
+
+

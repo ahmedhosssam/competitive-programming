@@ -16,7 +16,7 @@ Breadth-Fist Search (BFS):
 int OO = INFINITY;
 vector<int> bfs(int s, vector<vector<int>> &adjList) {
     vector<int> len(adjList.size(), OO);    // shortest path from node <s> to every other node
-    queue< pair<int, int> > q;  // pair: {node, depth}, and <depth> is distance from starting node
+    queue<pair<int, int> > q;  // pair: {node, depth}, and <depth> is distance from starting node
     q.push(make_pair(s, OO));
     len[s] = 0;
 

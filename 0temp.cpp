@@ -9,12 +9,16 @@ typedef pair<int, int> pi;
 #define S second
 #define pb push_back
 #define mp make_pair
-#define Print(a) for(int i = 0; i < a.size(); i++) {cout << a[i] << " ";}
+#define sz(a) a.size()
+#define Print(a) for(int i = 0; i < a.size(); i++) {cout << a[i] << " ";} cout << endl;
 #define all(x) (x).begin(), (x).end()
 #define rall(x) (x).rbegin(), (x).rend()
 #define endl "\n"
 #define YES cout << "YES\n";
 #define NO cout << "NO\n";
+
+void solve() {
+}
 
 int32_t main() {
     ios_base::sync_with_stdio(false);
@@ -25,11 +29,7 @@ int32_t main() {
     */
     int t; cin >> t;
     while (t--) {
-        int n; cin >> n;
-        vi a(n);
-        for(int i = 0 ; i < n ; i++) {
-            cin >> a[i];
-        }
+        solve();
     }
     return 0;
 }
